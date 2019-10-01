@@ -9,17 +9,20 @@ configuration:
 platform: Any CPU
 before_build:
   - cmd: nuget restore LiteDB.sln
-after_build:
-  - ps: Compress-Archive -Path "C:\projects\litedb\LiteDB\bin\Release\net45\LiteDB.dll", "C:\projects\litedb\LiteDB\bin\Release\nectoreapp2.1\LiteDB.Shell.dll" -CompressionLevel "Optimal" -DestinationPath "C:\projects\litedb\LiteDB\bin\Release\release-${env:APPVEYOR_BUILD_VERSION}.zip"
-  - only:
-    - configuration: Release
 build:
   project: LiteDB.sln
   verbosity: minimal
-deploy:
-- provider: Webhook
-  url: https://app.signpath.io/API/v1/b97db90c-7c03-416b-9003-8ed45742da5f/Integrations/AppVeyor?ProjectKey=mbdavid-LiteDB&SigningPolicyKey=test-signing
-  authorization:
-     secure: Yxu2EMTqYCJBmvAS36HyeSvoxlvAuCfB4B2+InT5gLsxe7Mkj/SGP1xFlnSY19Bv
-  only:
-    - configuration: Release
+for:
+-
+  matrix:
+    only:
+      - configuration: Release
+  after_build:
+    - ps: Compress-Archive -Path "LiteDB\bin\Release\net45\LiteDB.dll", "LiteDB\bin\Release\nectoreapp2.1\LiteDB.Shell.dll" -CompressionLevel "Optimal" -DestinationPath "LiteDB\bin\Release\release-${env:APPVEYOR_BUILD_VERSION}.zip"
+  artifacts:
+    - path: LiteDB\bin\Release\*.zip
+  deploy:
+  - provider: Webhook
+    url: https://app.signpath.io/API/v1/b97db90c-7c03-416b-9003-8ed45742da5f/Integrations/AppVeyor?ProjectKey=mbdavid-LiteDB&SigningPolicyKey=test-signing
+    authorization:
+      secure: Yxu2EMTqYCJBmvAS36HyeSvoxlvAuCfB4B2+InT5gLsxe7Mkj/SGP1xFlnSY19Bv
