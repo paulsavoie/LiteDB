@@ -18,7 +18,7 @@ for:
     only:
       - configuration: Release
   after_build:
-    - ps: Compress-Archive -Path "LiteDB\bin\Release\net45\LiteDB.dll", "LiteDB\bin\Release\nectoreapp2.1\LiteDB.Shell.dll" -CompressionLevel "Optimal" -DestinationPath "LiteDB\bin\Release\release-${env:APPVEYOR_BUILD_VERSION}.zip"
+    - ps: Compress-Archive -Path "LiteDB\bin\Release\net45\LiteDB.dll", "LiteDB.Shell\bin\Release\nectoreapp2.1\LiteDB.Shell.dll" -CompressionLevel "Optimal" -DestinationPath "LiteDB\bin\Release\release-${env:APPVEYOR_BUILD_VERSION}.zip"
   artifacts:
     - path: LiteDB\bin\Release\*.zip
   deploy:
