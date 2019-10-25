@@ -13,26 +13,14 @@ build:
   project: LiteDB.sln
   verbosity: minimal
 for:
-  -
-    matrix:
-      only:
-        - configuration: Release
-    artifacts:
-      - path: LiteDB\bin\Release\net45\LiteDB.dll
-    deploy:
-    - provider: Webhook
-      url: https://app.signpath.io/API/v1/b97db90c-7c03-416b-9003-8ed45742da5f/Integrations/AppVeyor?ProjectKey=mbdavid-LiteDB&SigningPolicyKey=release-signing
-      authorization:
-        secure: 5Xj6LCgkuuxTKbNrjQHcGeijmtDAK4fCOwdyD5KOQed2T5tz9rdk5jmw4asn9V6mOi9y0Xi335lK8Ec7spTomA==
-
-  -
-    matrix:
-      only:
-        - configuration: Debug
-      artifacts:
-      - path: LiteDB\bin\Debug\net45\LiteDB.dll
-    deploy:
-    - provider: Webhook
-      url: https://app.signpath.io/API/v1/b97db90c-7c03-416b-9003-8ed45742da5f/Integrations/AppVeyor?ProjectKey=mbdavid-LiteDB&SigningPolicyKey=test-signing
-      authorization:
-        secure: 5Xj6LCgkuuxTKbNrjQHcGeijmtDAK4fCOwdyD5KOQed2T5tz9rdk5jmw4asn9V6mOi9y0Xi335lK8Ec7spTomA==
+-
+  matrix:
+    only:
+      - configuration: Release
+  artifacts:
+    - path: LiteDB\bin\Release\net45\LiteDB.dll
+  deploy:
+  - provider: Webhook
+    url: https://app.signpath.io/API/v1/b97db90c-7c03-416b-9003-8ed45742da5f/Integrations/AppVeyor?ProjectKey=mbdavid-LiteDB&SigningPolicyKey=test-signing
+    authorization:
+      secure: 5Xj6LCgkuuxTKbNrjQHcGeijmtDAK4fCOwdyD5KOQed2T5tz9rdk5jmw4asn9V6mOi9y0Xi335lK8Ec7spTomA==
