@@ -24,6 +24,7 @@ for:
     url: https://app.signpath.io/API/v1/b97db90c-7c03-416b-9003-8ed45742da5f/Integrations/AppVeyor?ProjectKey=mbdavid-LiteDB&SigningPolicyKey=release-signing
     authorization:
       secure: 5Xj6LCgkuuxTKbNrjQHcGeijmtDAK4fCOwdyD5KOQed2T5tz9rdk5jmw4asn9V6mOi9y0Xi335lK8Ec7spTomA==
+for:
 -
   matrix:
     only:
